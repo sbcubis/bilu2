@@ -3,17 +3,14 @@
 // ─────────────────────────────────────────────
 
 export const CONFIG = {
-  // Anthropic Claude — used for chat
-  ANTHROPIC_API_KEY: 'REPLACE_ANTHROPIC_API_KEY',
-  CLAUDE_MODEL:      'claude-opus-4-5',
+  // OpenAI — chat (GPT-4o) + Whisper transcription
+  OPENAI_API_KEY: 'REPLACE_OPENAI_API_KEY',
+  OPENAI_MODEL:   'gpt-4o',
 
   // System prompt
   SYSTEM_PROMPT: `You are a helpful, sharp, and warm personal AI assistant.
 You give concise, direct answers. You have personality — you're real, not corporate.
 Keep responses conversational and to the point.`,
-
-  // OpenAI Whisper — for voice transcription only
-  OPENAI_API_KEY: 'REPLACE_OPENAI_API_KEY',
 
   // ElevenLabs TTS
   ELEVENLABS_API_KEY:  'REPLACE_ELEVENLABS_API_KEY',
