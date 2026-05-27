@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+@layer base {
+  :root {
+    --font-sans: 'Space Grotesk', sans-serif;
+    --font-display: 'Orbitron', sans-serif;
+    --background: 270 40% 3%;
+    --foreground: 270 20% 95%;
+    --card: 270 35% 5%;
+    --card-foreground: 270 20% 95%;
+    --border: 270 25% 15%;
+    --input: 270 25% 15%;
+    --ring: 270 80% 65%;
+    --primary: 270 80% 65%;
+    --primary-foreground: 270 40% 3%;
+    --secondary: 270 30% 12%;
+    --secondary-foreground: 270 20% 95%;
+    --muted: 270 30% 12%;
+    --muted-foreground: 270 15% 60%;
+    --accent: 280 90% 70%;
+    --accent-foreground: 270 40% 3%;
+    --destructive: 320 80% 60%;
+    --destructive-foreground: 270 40% 3%;
+    --radius: 1rem;
+  }
+
+  * { @apply border-border; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-background text-foreground; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overscroll-behavior: none; }
+  html, body, #root { height: 100%; overflow: hidden; }
+}
+
+@keyframes slowPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(0.97); }
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(147,51,234,0.3); border-radius: 2px; }
