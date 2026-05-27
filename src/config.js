@@ -3,17 +3,20 @@
 // ─────────────────────────────────────────────
 
 export const CONFIG = {
-  // OpenAI — used for chat (GPT-4o) AND Whisper transcription
-  OPENAI_API_KEY: 'REPLACE_OPENAI_API_KEY',
-  OPENAI_MODEL:   'gpt-4o',
+  // Anthropic Claude — used for chat
+  ANTHROPIC_API_KEY: 'REPLACE_ANTHROPIC_API_KEY',
+  CLAUDE_MODEL:      'claude-opus-4-5',
 
-  // System prompt — who bilu2 is
-  SYSTEM_PROMPT: `You are a helpful, sharp, and warm personal AI assistant. 
-You give concise, direct answers. You have a personality — you're real, not corporate.
+  // System prompt
+  SYSTEM_PROMPT: `You are a helpful, sharp, and warm personal AI assistant.
+You give concise, direct answers. You have personality — you're real, not corporate.
 Keep responses conversational and to the point.`,
 
+  // OpenAI Whisper — for voice transcription only
+  OPENAI_API_KEY: 'REPLACE_OPENAI_API_KEY',
+
   // ElevenLabs TTS
-  ELEVENLABS_API_KEY: 'REPLACE_ELEVENLABS_API_KEY',
+  ELEVENLABS_API_KEY:  'REPLACE_ELEVENLABS_API_KEY',
   ELEVENLABS_VOICE_ID: 'HE0XlnHeqQoWUBWhwUa3',
   ELEVENLABS_MODEL:    'eleven_turbo_v2_5',
 
