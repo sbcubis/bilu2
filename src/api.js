@@ -15,31 +15,29 @@ export async function transcribeAudio(blob) {
   return d.text?.trim() || ''
 }
 
-// ── Chat with Claude ───────────────────────────────────────────
-// messages = [{ role: 'user'|'assistant', content: string }, ...]
+// ── Chat with GPT-4o ───────────────────────────────────────────
 export async function chat(messages) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
-      'x-api-key':         CONFIG.ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01',
-      'Content-Type':      'application/json',
-      // Required for browser CORS — uses the direct API
-      'anthropic-dangerous-direct-browser-access': 'true',
+      Authorization: `Bearer ${CONFIG.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model:      CONFIG.CLAUDE_MODEL,
+      model: CONFIG.OPENAI_MODEL,
       max_tokens: 1024,
-      system:     CONFIG.SYSTEM_PROMPT,
-      messages:   messages.map(({ role, content }) => ({ role, content })),
+      messages: [
+        { role: 'system', content: CONFIG.SYSTEM_PROMPT },
+        ...messages.map(({ role, content }) => ({ role, content })),
+      ],
     }),
   })
   if (!res.ok) {
     const err = await res.json().catch(() => ({}))
-    throw new Error(`Claude ${res.status}: ${err?.error?.message || 'unknown'}`)
+    throw new Error(`OpenAI ${res.status}: ${err?.error?.message || 'unknown'}`)
   }
   const d = await res.json()
-  return d.content?.[0]?.text?.trim() || ''
+  return d.choices?.[0]?.message?.content?.trim() || ''
 }
 
 // ── ElevenLabs TTS — parallel sentence streaming ───────────────
@@ -59,7 +57,6 @@ export async function speakText(text, audioElementRef) {
       }),
     }).then(r => { if (!r.ok) throw new Error(`ElevenLabs ${r.status}`); return r.blob() })
 
-  // Kick off all sentence fetches in parallel
   const promises = sentences.map(fetchBlob)
 
   for (let i = 0; i < promises.length; i++) {
